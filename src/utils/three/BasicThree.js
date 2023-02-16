@@ -1,13 +1,12 @@
 import * as THREE from 'three';
 export default  class BasicThree {
     renderer = null
-    // 当前场景的名字
-    sceneName = null
     // 场景
     scene = {}
     functionList = []
     camera = null
     textureLoader = null
+    requestAnimationFrameId = null
 
     constructor(dom, options = {
         width: dom.offsetWidth,
@@ -23,22 +22,24 @@ export default  class BasicThree {
         window.requestAnimationFrame(() => {
             this.render()
         });
+        // 是否创建纹理加载器
         if(options.IsTextureLoader) {
             this.createTextureLoader()
         }
     }
+    // 设置摄像头
     setCamera(camera) {
         this.camera = camera
     }
     getRenderer() {
         return this.renderer
     }
-    createScene(sceneName) {
-     this.sceneName = sceneName
-     return this.scene[sceneName] = new THREE.Scene()
+    // 创建场景
+    createScene() {
+     return this.scene = new THREE.Scene()
     }
     getCurrentScene() {
-        return this.scene[this.sceneName]
+        return this.scene
     }
 
      render() {
@@ -52,13 +53,15 @@ export default  class BasicThree {
             })
         }
         this.renderer.render( this.getCurrentScene(), this.camera );
-         window.requestAnimationFrame(() => {
+        this.requestAnimationFrameId = window.requestAnimationFrame(() => {
              this.render()
          });
     }
+    // 可以把多个需要更新的动画等等放进里面
     AddFunctionList (functionEvent) {
         this.functionList.push(functionEvent)
     }
+    // 清除动画
     ClearFunctionList() {
         this.functionList = []
     }
@@ -70,7 +73,27 @@ export default  class BasicThree {
         this.createTextureLoader()
         return this.textureLoader
     }
-    dispose() {
+    clearThree(obj){
+        while(obj.children.length > 0){
+            this.clearThree(obj.children[0])
+            obj.remove(obj.children[0]);
+        }
+        if(obj.geometry) obj.geometry.dispose()
 
+        if(obj.material){
+            //in case of map, bumpMap, normalMap, envMap ...
+            Object.keys(obj.material).forEach(prop => {
+                if(!obj.material[prop])
+                    return
+                if(typeof obj.material[prop].dispose === 'function')
+                    obj.material[prop].dispose()
+            })
+            obj.material.dispose()
+        }
+    }
+    dispose() {
+        this.clearThree(this.scene)
+        this.textureLoader && this.textureLoader.dispose()
+        this.requestAnimationFrameId && cancelAnimationFrame(this.requestAnimationFrameId)
     }
 }

@@ -48,13 +48,13 @@ export default {
     this.createMesh()
     let basicRaycaster = new BasicRaycaster(dom.offsetWidth , dom.offsetHeight)
     // debugger
-    test.AddFunctionList(() => {
-      stats.update();
-      let objects = basicRaycaster.getObject(scene, camera)
-      if(objects.length > 0) {
-        console.log('object', objects[0],objects[0].object.name)
-      }
-    })
+    // test.AddFunctionList(() => {
+    //   stats.update();
+    //   let objects = basicRaycaster.getObject(scene, camera)
+    //   if(objects.length > 0) {
+    //     console.log('object', objects[0],objects[0].object.name)
+    //   }
+    // })
 
   },
   methods: {

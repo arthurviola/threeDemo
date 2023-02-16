@@ -10,5 +10,14 @@ export default defineConfig({
     alias: {
       '@': path.resolve(__dirname, './src') // 路径别名
     },
-  }
+  },
+  css: {
+    preprocessorOptions: {
+      // 处理vite报错Internal server error: Inline JavaScript is not enabled. Is it set in your options?
+      less: {
+        // src/css/common.less 是你需要全局变量 （你定义的定义的方法 和 变量等）
+        javascriptEnabled: true,
+      },
+    },
+  },
 })
