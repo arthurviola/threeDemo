@@ -13,12 +13,12 @@
   </div>
 </template>
 <script>
-import SingletonViewer from "../../utils/three/SingletonViewer.js";
-import BasicThree  from "../../utils/three/BasicThree.js";
+import SingletonViewer from "../utils/three/SingletonViewer.js";
+import BasicThree  from "../utils/three/BasicThree.js";
 import mapData from '@/assets/three/china.json'
 import * as THREE from 'three';
 import {mergeBufferGeometries} from "three/addons/utils/BufferGeometryUtils.js";
-import BasicRaycaster from "../../utils/three/BasicRaycaster.js";
+import BasicRaycaster from "../utils/three/BasicRaycaster.js";
 import Stats from 'three/addons/libs/stats.module.js';
 let stats = new Stats();
 import { vertexShader, fragmentShader } from '@/utils/three/shader/gradient.js'
@@ -52,12 +52,6 @@ export default {
       stats.update();
       let objects = basicRaycaster.getObject(scene, camera)
       if(objects.length > 0) {
-        // let object = objects[0]
-        // object.object.geometry.groups.map((item, index) => {
-        //   if(item.start < object.faceIndex && (item.start + item.count) > object.faceIndex) {
-        //     console.log('object', object.object.geometry.userData.nameList[index])
-        //   }
-        // } )
         console.log('object', objects[0],objects[0].object.name)
       }
     })
