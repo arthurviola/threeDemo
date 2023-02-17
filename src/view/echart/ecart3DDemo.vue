@@ -11,12 +11,12 @@
 <script>
 
 import MapChartPanel from "@/components/map-chart-panel/index.vue";
-import {getBasicMapOption} from "@/components/map-chart-panel/chartOption/map/getBasicMapOption"
+import {getBasicMapOption} from "@/components/map-chart-panel/chartOption/map/getBasicMapOption.js"
 import {getLinesMapOption} from "@/components/map-chart-panel/chartOption/lines/getLinesMapOption.js";
 import {chinaDatas,chinaGeoCoordMap} from "@/components/map-chart-panel/data.js";
-import {convertData} from "../components/map-chart-panel/tool.js";
-import {getScatterMapOption} from "../components/map-chart-panel/chartOption/scatter/getScatterMapOption.js";
-import {getEffectScatterMapOption} from "../components/map-chart-panel/chartOption/scatter/getEffectScatter.js";
+import {convertData} from "../../components/map-chart-panel/tool.js";
+import {getScatterMapOption} from "../../components/map-chart-panel/chartOption/scatter/getScatterMapOption.js";
+import {getEffectScatterMapOption} from "../../components/map-chart-panel/chartOption/scatter/getEffectScatter.js";
 export default {
   components: {
     MapChartPanel

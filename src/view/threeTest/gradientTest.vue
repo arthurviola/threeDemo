@@ -13,12 +13,12 @@
   </div>
 </template>
 <script>
-import SingletonViewer from "../utils/three/SingletonViewer.js";
-import BasicThree  from "../utils/three/BasicThree.js";
+import SingletonViewer from "@/utils/three/SingletonViewer.js";
+import BasicThree  from "@/utils/three/BasicThree.js";
 import mapData from '@/assets/three/china.json'
 import * as THREE from 'three';
 import {mergeBufferGeometries} from "three/addons/utils/BufferGeometryUtils.js";
-import BasicRaycaster from "../utils/three/BasicRaycaster.js";
+// import BasicRaycaster from "@/utils/three/BasicRaycaster.js";
 import Stats from 'three/addons/libs/stats.module.js';
 let stats = new Stats();
 import { vertexShader, fragmentShader } from '@/utils/three/shader/gradient.js'
@@ -46,7 +46,7 @@ export default {
     test.setCamera(camera)
     this.createLight()
     this.createMesh()
-    let basicRaycaster = new BasicRaycaster(dom.offsetWidth , dom.offsetHeight)
+    // let basicRaycaster = new BasicRaycaster(dom.offsetWidth , dom.offsetHeight)
     // debugger
     // test.AddFunctionList(() => {
     //   stats.update();

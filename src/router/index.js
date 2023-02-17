@@ -8,7 +8,7 @@ import {
 
 
 const router = createRouter({
-  history: createWebHashHistory('/'),
+  history: createWebHashHistory(),
   routes: constantRouterMap,
 });
 export default router;
