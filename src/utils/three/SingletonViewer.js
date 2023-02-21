@@ -1,6 +1,6 @@
 export default class SingletonViewer {
     static instance
-    customClass = null
+    customClass = {}
     // 静态方法
     static getInstance () {
         if (!this.instance) {
@@ -8,10 +8,12 @@ export default class SingletonViewer {
         }
         return this.instance
     }
-    setCustomClass(customClass) {
-        this.customClass = customClass
+    setCustomClass(name,customClass) {
+        if(name) {
+            this.customClass[name] = customClass
+        }
     }
-    getCustomClass() {
-       return  this.customClass
+    getCustomClass(name) {
+       return  name && this.customClass[name]
     }
 }

@@ -14,8 +14,13 @@ export const constantRouterMap = [
     component: () => import('@/view/echart/ecart3DDemo.vue'),
   },
   {
-    path: '/three',
-    name: 'three',
+    path: '/gradient',
+    name: 'gradient',
     component: () => import('@/view/threeTest/gradientTest.vue'),
+  },
+  {
+    path: '/mergeBufferGeometriesTest',
+    name: 'mergeBufferGeometriesTest',
+    component: () => import('@/view/threeTest/mergeBufferGeometriesTest.vue'),
   },
 ];

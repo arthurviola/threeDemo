@@ -4,7 +4,7 @@
  * @LastEditors: 徐梦韵
  * @LastEditTime: 2023-02-14 17:13:36
  * @FilePath: \vite-project\src\components\three\test.vue
- * @Description: 这个是渐变shader的demo
+ * @Description: 合并Geometries的测试代码
  *
 -->
 <template>
@@ -88,64 +88,64 @@ export default {
       let materialList = []
       let test = SingletonViewer.getInstance().getCustomClass('three')
       let textureLoader = test.getTextureLoader()
-        // let box = {
-        //   "isBox3": true,
-        //     "min": {
-        //       "x": 73.50235748291016,
-        //       "y": 3.3971619606018066,
-        //       "z": 0
-        //     },
-        //     "max": {
-        //         "x": 135.09567260742188,
-        //         "y": 53.563270568847656,
-        //         "z": 10
-        //   }
-        // }
-        childAreaArr.forEach((childArea, i) => {
-          var shapeArr = []
-          childArea.geo.forEach((vertices) => {
-            var shape = new THREE.Shape(vertices)
-            shapeArr.push(shape)
-          })
-          // NameList.push(childArea.name)
-          var geometry = new THREE.ExtrudeGeometry(
-              shapeArr,
-              //拉伸参数
-              {
-                // name: childArea.name,
-                depth: 10,//拉伸长度
-                bevelEnabled: false //无倒角
-              }
-          )
-          // geometry.userData.name = childArea.name
-          // geometries.push(geometry)
-          // let material = new THREE.MeshPhongMaterial({
-          //   // color: 0x1aa790,
-          //   map: texture
-          // }) //材质对象
-          const shaderMaterial = new THREE.ShaderMaterial( {
-            uniforms: {
-              // maxY -MinY
-              step: { value: 53.563270568847656 - 3.3971619606018066 },
-              // #1da781
-              beginColor: { value: new THREE.Color(29.0,167.0,129.0) },
-              endColor: { value: new THREE.Color(15,169,195) },
-              beginTransparency: { value: 1},
-              endTransparency: { value: 0.3},
-              minY: { value: 3.3971619606018066},
-            },
-            vertexShader,
-            fragmentShader
-          } );
-          // materialList.push(material)
-          var mesh = new THREE.Mesh(geometry, shaderMaterial) //网格模型对象
-          mesh.name = childArea.name
-          mapGroup.add(mesh)
+      // let box = {
+      //   "isBox3": true,
+      //     "min": {
+      //       "x": 73.50235748291016,
+      //       "y": 3.3971619606018066,
+      //       "z": 0
+      //     },
+      //     "max": {
+      //         "x": 135.09567260742188,
+      //         "y": 53.563270568847656,
+      //         "z": 10
+      //   }
+      // }
+      childAreaArr.forEach((childArea, i) => {
+        var shapeArr = []
+        childArea.geo.forEach((vertices) => {
+          var shape = new THREE.Shape(vertices)
+          shapeArr.push(shape)
         })
+        // NameList.push(childArea.name)
+        var geometry = new THREE.ExtrudeGeometry(
+            shapeArr,
+            //拉伸参数
+            {
+              // name: childArea.name,
+              depth: 10,//拉伸长度
+              bevelEnabled: false //无倒角
+            }
+        )
+        // geometry.userData.name = childArea.name
+        // geometries.push(geometry)
+        // let material = new THREE.MeshPhongMaterial({
+        //   // color: 0x1aa790,
+        //   map: texture
+        // }) //材质对象
+        // materialList.push(material)
+      })
       // debugger
       // 这里融合 Geometries 进行优化
-      // let geometry = mergeBufferGeometries( geometries, true );
-      // geometry.userData.nameList = NameList
+      const shaderMaterial = new THREE.ShaderMaterial( {
+        uniforms: {
+          // maxY -MinY
+          step: { value: 53.563270568847656 - 3.3971619606018066 },
+          // #1da781
+          beginColor: { value: new THREE.Color(29.0,167.0,129.0) },
+          endColor: { value: new THREE.Color(15,169,195) },
+          beginTransparency: { value: 1},
+          endTransparency: { value: 0.3},
+          minY: { value: 3.3971619606018066},
+        },
+        vertexShader,
+        fragmentShader
+      } );
+      let geometry = mergeBufferGeometries( geometries, true );
+      var mesh = new THREE.Mesh(geometry, shaderMaterial) //网格模型对象
+      // mesh.name = childArea.name
+      mapGroup.add(mesh)
+      geometry.userData.nameList = NameList
     },
     //提取行政区域所有子区域边界数据
     getChildAreaArrFun(data) {

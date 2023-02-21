@@ -5,10 +5,10 @@ const vertexShader = `
                             //将attributes的normal通过varying赋值给了向量vNormal
                             vNormal = normal;
                             vPosition = position;
-                                //projectionMatrix是投影变换矩阵 modelViewMatrix是相机坐标系的变换矩阵
+                            //projectionMatrix是投影变换矩阵 modelViewMatrix是相机坐标系的变换矩阵
                             gl_Position = projectionMatrix * modelViewMatrix * vec4( position.x, position.y, position.z, 1.0 );
                         }
-                `
+                      `
 const fragmentShader = `
                         varying vec3 vNormal;
                         varying vec3 vPosition;
@@ -26,6 +26,7 @@ const fragmentShader = `
                             float b = (beginColor.z + (endColor.z - beginColor.z) /step * (vPosition.y - minY)) /255.0;
                             float a = (beginTransparency + (endTransparency - beginTransparency)  / step * (vPosition.y - minY));
                             gl_FragColor = vec4(r,g,b, a);
-                        }`
+                        }
+                        `
 
 export { vertexShader , fragmentShader }
