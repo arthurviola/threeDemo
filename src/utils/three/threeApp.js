@@ -33,7 +33,8 @@ export default class ThreeApp {
     initApp () {
         // 渲染器
         this.renderer = new THREE.WebGLRenderer({
-            antialias: true
+            antialias: true,
+            // logarithmicDepthBuffer: true
         })
         this.renderer.setPixelRatio(window.devicePixelRatio)
         this.renderer.setSize(this.width, this.height)
@@ -45,29 +46,29 @@ export default class ThreeApp {
 
         // 场景
         this.scene = new THREE.Scene()
-        this.scene.background = new THREE.Color(0x003474)
+        // this.scene.background = new THREE.Color(0x003474)
 
         // 相机
-        this.camera = new THREE.PerspectiveCamera(40, this.width / this.height, 1, 2000)
-        this.camera.position.set(80, 300, 240)
-        this.camera.rotation.set(-0.9031890395432095, 0.20282238217550816, 0.250156601957289)
+        this.camera = new THREE.PerspectiveCamera(40, this.width / this.height, 1, 1000)
+        this.camera.position.set(0,0,0)
+        this.camera.rotation.set(0,0,0)
 
-        // 聚光灯，产生阴影
+        // // 聚光灯，产生阴影
         // this.spotLight = new THREE.SpotLight(0xffffff, 0.8, 200, Math.PI / 6, 0, 1)
         // this.spotLight.castShadow = true
-        // 下面两行影响阴影质量
+        // // 下面两行影响阴影质量
         // this.spotLight.shadow.mapSize.width = 512 * 4
         // this.spotLight.shadow.mapSize.height = 512 * 4
         // this.spotLight.position.set(500, 500, 500)
         // this.scene.add(this.spotLight)
-
-        // 聚光灯，不产生阴影
+        //
+        // // 聚光灯，不产生阴影
         // this.spotLightSp = new THREE.SpotLight(0xffffff, 0, 200, Math.PI / 6, 0, 0.1)
         // this.scene.add(this.spotLightSp)
-
-        // 环境光，均匀照亮场内物体
-        this.ambientLight = new THREE.AmbientLight(0xffffff, 1)
-        this.scene.add(this.ambientLight)
+        //
+        // // 环境光，均匀照亮场内物体
+        // this.ambientLight = new THREE.AmbientLight(0xffffff, 1)
+        // this.scene.add(this.ambientLight)
 
         let grid = new THREE.GridHelper(1000, 20, 0x122562, 0x122562);
         this.scene.add(grid);

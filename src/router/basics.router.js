@@ -23,4 +23,9 @@ export const constantRouterMap = [
     name: 'mergeBufferGeometriesTest',
     component: () => import('@/view/threeTest/mergeBufferGeometriesTest.vue'),
   },
+  {
+    path: '/modelTest',
+    name: 'modelTest',
+    component: () => import('@/view/threeTest/modelTest.vue'),
+  },
 ];

@@ -1,20 +1,23 @@
 <script setup>
-// import HelloWorld from './view/HelloWorld.vue'
-// import gradientTest from '@/view/gradientTest.vue'
-import { ref, toRefs, onMounted, onBeforeUnmount, watch } from 'vue';
+import { ref} from 'vue';
 import demo from '@/assets/img/img_3.png'
 import threeDemo from '@/assets/img/threeDemo.png'
 import { useRouter } from 'vue-router';
 const router = useRouter();
 const list = ref([
   {
-    path: 'echart',
+    routerName: 'echart',
     name: 'ecahrt3D示例1',
     src: demo
   },
   {
-    path: 'three',
+    routerName: 'gradient',
     name: 'three 渐变',
+    src: threeDemo
+  },
+  {
+    routerName: 'modelTest',
+    name: 'gltf压缩测试',
     src: threeDemo
   }
 ]);
@@ -22,7 +25,7 @@ const list = ref([
 const clickItem = (item) => {
   // console.log(useRouter())
   router.push({
-    name: item.path,
+    name: item.routerName,
   })
 }
 </script>
@@ -34,12 +37,8 @@ const clickItem = (item) => {
       <span>{{item.name}}</span>
     </div>
   </div>
-  <router-view></router-view>
 </template>
 <style lang="scss">
-#app{
-  height: 100vh;
-}
 .title{
   font-size: 30px;
   text-align: center;

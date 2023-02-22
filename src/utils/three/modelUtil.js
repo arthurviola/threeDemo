@@ -2,8 +2,8 @@
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader.js'
 import { FBXLoader } from 'three/examples/jsm/loaders/FBXLoader.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader'
-
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
+import * as THREE from 'three'
 export default class ModelUtil {
     // 构造函数
     constructor () {
@@ -12,7 +12,7 @@ export default class ModelUtil {
         const gltfLoader = new GLTFLoader()
         const dracoLoader = new DRACOLoader()
 
-        dracoLoader.setDecoderPath(`${process.env.BASE_URL}static/draco/`)
+        dracoLoader.setDecoderPath(`https://threejs.org/examples/jsm/libs/draco/`)
 
         // gltfloader 使用 dracoLoader
         gltfLoader.setDRACOLoader(dracoLoader)
@@ -61,7 +61,19 @@ export default class ModelUtil {
                     this.pool[_opts.key] = object3D
 
                     object3D.traverse(item => {
+                        console.log(item.material)
+                        if(item?.material) {
+                            item.material.depthTest = true
+                            item.material.polygonOffset = true
+                            item.material.polygonOffsetFactor= 0.75
+                            item.material.polygonOffsetUnits= 4.0
+                        }
+
                         if (item.type === 'Mesh') {
+                            // item.material.depthWrite = false
+                            // console.log(item.material)
+                            // item.material.map.magFilter = THREE.LinearFilter
+                            // item.material.map.minFilter  = THREE.LinearMipMapLinearFilter
                             item.castShadow = _opts.castShadow
                             item.receiveShadow = _opts.receiveShadow
                         }
@@ -69,8 +81,12 @@ export default class ModelUtil {
 
                     resolve(res)
                 },
-                (xhr) => {},
-                (err) => { reject(err) }
+                (xhr) => {
+                    _opts.onProgress && _opts.onProgress(xhr)
+                },
+                (err) => {
+                    _opts.onError && _opts.onError(err)
+                    reject(err) }
             )
         })
     }
