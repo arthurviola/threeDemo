@@ -20,8 +20,8 @@ export function getBasicMapOption (config, seriesItem = []) {
             regions: [{
                 name: '南海诸岛',
                 itemStyle: {
-                    areaColor: 'rgba(0, 10, 52, 1)',
-                    borderColor: 'rgba(0, 10, 52, 1)',
+                    areaColor: 'rgba(0, 10, 52, 0)',
+                    borderColor: 'rgba(0, 10, 52, 0)',
                     normal: {
                         opacity: 0,
                         label: {
@@ -54,7 +54,7 @@ export function getBasicMapOption (config, seriesItem = []) {
                     normal: {
                         areaColor: config?.areaColor || '#12235c',
                         borderColor: config?.borderColor ||'#2ab8ff',
-                        borderWidth: config?.borderWidth || .5,
+                        // borderWidth: config?.borderWidth || .5,
                         shadowColor: config?.shadowColor || 'rgba(0,54,255, 0.4)',
                         shadowBlur: config?.shadowBlur || 100
                     },

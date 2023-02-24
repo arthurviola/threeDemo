@@ -49,7 +49,7 @@ export default {
 }
 .loadBox{
   font-size:70px;
-  position:absolute;
+  position:relative;
   display: inline-block;
   //left: calc(100% - 150px);
   //top: calc(100% - 5px);

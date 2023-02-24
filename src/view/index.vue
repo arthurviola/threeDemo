@@ -19,6 +19,11 @@ const list = ref([
     routerName: 'modelTest',
     name: 'gltf压缩测试',
     src: threeDemo
+  },
+  {
+    routerName: 'echarTest1',
+    name: '动画1',
+    src: threeDemo
   }
 ]);
 
