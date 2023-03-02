@@ -17,8 +17,6 @@ import SingletonViewer from "@/utils/three/SingletonViewer.js";
 import BasicThree  from "@/utils/three/BasicThree.js";
 import mapData from '@/assets/three/china.json'
 import * as THREE from 'three';
-import {mergeBufferGeometries} from "three/addons/utils/BufferGeometryUtils.js";
-// import BasicRaycaster from "@/utils/three/BasicRaycaster.js";
 import Stats from 'three/addons/libs/stats.module.js';
 let stats = new Stats();
 import { vertexShader, fragmentShader } from '@/utils/three/shader/gradient.js'
@@ -46,16 +44,6 @@ export default {
     test.setCamera(camera)
     this.createLight()
     this.createMesh()
-    // let basicRaycaster = new BasicRaycaster(dom.offsetWidth , dom.offsetHeight)
-    // debugger
-    // test.AddFunctionList(() => {
-    //   stats.update();
-    //   let objects = basicRaycaster.getObject(scene, camera)
-    //   if(objects.length > 0) {
-    //     console.log('object', objects[0],objects[0].object.name)
-    //   }
-    // })
-
   },
   methods: {
     createLight() {
@@ -83,24 +71,7 @@ export default {
 
     },
     async extrudeMeshFun(childAreaArr, mapGroup, h) {
-      let geometries = [];
-      let NameList = []
-      let materialList = []
       let test = SingletonViewer.getInstance().getCustomClass('three')
-      let textureLoader = test.getTextureLoader()
-        // let box = {
-        //   "isBox3": true,
-        //     "min": {
-        //       "x": 73.50235748291016,
-        //       "y": 3.3971619606018066,
-        //       "z": 0
-        //     },
-        //     "max": {
-        //         "x": 135.09567260742188,
-        //         "y": 53.563270568847656,
-        //         "z": 10
-        //   }
-        // }
         childAreaArr.forEach((childArea, i) => {
           var shapeArr = []
           childArea.geo.forEach((vertices) => {
@@ -117,17 +88,9 @@ export default {
                 bevelEnabled: false //无倒角
               }
           )
-          // geometry.userData.name = childArea.name
-          // geometries.push(geometry)
-          // let material = new THREE.MeshPhongMaterial({
-          //   // color: 0x1aa790,
-          //   map: texture
-          // }) //材质对象
           const shaderMaterial = new THREE.ShaderMaterial( {
             uniforms: {
-              // maxY -MinY
               step: { value: 53.563270568847656 - 3.3971619606018066 },
-              // #1da781
               beginColor: { value: new THREE.Color(29.0,167.0,129.0) },
               endColor: { value: new THREE.Color(15,169,195) },
               beginTransparency: { value: 1},
@@ -142,10 +105,6 @@ export default {
           mesh.name = childArea.name
           mapGroup.add(mesh)
         })
-      // debugger
-      // 这里融合 Geometries 进行优化
-      // let geometry = mergeBufferGeometries( geometries, true );
-      // geometry.userData.nameList = NameList
     },
     //提取行政区域所有子区域边界数据
     getChildAreaArrFun(data) {

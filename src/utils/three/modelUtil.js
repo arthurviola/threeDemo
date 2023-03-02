@@ -52,8 +52,8 @@ export default class ModelUtil {
                 _opts.path,
                 (res) => {
 
-                    console.log("res")
-                   console.log(res)
+                   //  console.log("res")
+                   // console.log(res)
 
 
                     const object3D = ['glb', 'gltf'].includes(extName) ? res.scene : res
@@ -61,15 +61,15 @@ export default class ModelUtil {
                     this.pool[_opts.key] = object3D
 
                     object3D.traverse(item => {
-                        console.log(item.material)
-                        if(item?.material) {
-                            item.material.depthTest = true
-                            item.material.polygonOffset = true
-                            item.material.polygonOffsetFactor= 0.75
-                            item.material.polygonOffsetUnits= 4.0
-                        }
+                        // console.log(item.material)
 
                         if (item.type === 'Mesh') {
+                            // if(item?.material) {
+                            //     item.material.depthTest = true
+                            //     item.material.polygonOffset = true
+                            //     item.material.polygonOffsetFactor= 0.75
+                            //     item.material.polygonOffsetUnits= 4.0
+                            // }
                             // item.material.depthWrite = false
                             // console.log(item.material)
                             // item.material.map.magFilter = THREE.LinearFilter

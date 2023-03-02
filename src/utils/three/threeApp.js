@@ -34,7 +34,7 @@ export default class ThreeApp {
         // 渲染器
         this.renderer = new THREE.WebGLRenderer({
             antialias: true,
-            // logarithmicDepthBuffer: true
+            logarithmicDepthBuffer: true
         })
         this.renderer.setPixelRatio(window.devicePixelRatio)
         this.renderer.setSize(this.width, this.height)
@@ -49,7 +49,7 @@ export default class ThreeApp {
         // this.scene.background = new THREE.Color(0x003474)
 
         // 相机
-        this.camera = new THREE.PerspectiveCamera(40, this.width / this.height, 1, 1000)
+        this.camera = new THREE.PerspectiveCamera(40, this.width / this.height, 1, 2000)
         this.camera.position.set(0,0,0)
         this.camera.rotation.set(0,0,0)
 
